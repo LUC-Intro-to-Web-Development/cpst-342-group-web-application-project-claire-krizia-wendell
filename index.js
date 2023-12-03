@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 //Route to home
 app.get('/', function (req, res) {
 	
-	dbOperations.getAllItems(res);
+	dbOperations.getAllBookTitles(res);
 
 })
 
@@ -91,3 +91,9 @@ app.get ('/remove_item', (req, res) => {
 
     res.redirect("/");
 })
+
+//Route to Search for a book
+
+
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
