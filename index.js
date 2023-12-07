@@ -40,9 +40,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Route to home
-app.get('/', function (req, res) {
+app.get('/search_item', function (req, res) {
+
+    var bookEntry = req.params.bookName;
 	
-	dbOperations.getAllBookTitles(res);
+	dbOperations.getSpecificBook(bookEntry, res);
+
+    //res.render('home.hbs', {title: "The Digital Book Corner"})
+
+})
+
+//Route to home
+app.get('/', function (req, res) {
+
+    //var bookEntry = res.params.bookName;
+	
+	//dbOperations.getSpecificBook(res);
 
     res.render('home.hbs', {title: "The Digital Book Corner"})
 
@@ -50,11 +63,11 @@ app.get('/', function (req, res) {
 
 //create search function
 
-const searchInput = document.querySelector('.input')
+//const searchInput = document.querySelector('.input')
 
 //event listener for search function 
 
-searchInput.addEventListener("input", (e) =>{
+/*searchInput.addEventListener("input", (e) =>{
 
     //declare event target
     let value = e.target.value
@@ -88,10 +101,10 @@ searchInput.addEventListener("input", (e) =>{
         // return nothing
         clearList()
     }
-})
+})*/
 
-//creating and declaring a function for a setlist
-function setList(results){
+//creating and declaring a function for a setlist -- view file
+/*function setList(results){
     for (const person of results){
         // creating a li element for each result item
         const resultItem = document.createElement('li')
@@ -108,9 +121,9 @@ function setList(results){
         // appending the result item to the list
         list.appendChild(resultItem)
     }
-}
+}*/
 
-const clearButton = document.getElementById('clear')
+/*const clearButton = document.getElementById('clear')
 
 clearButton.addEventListener("click", () =>{
 
@@ -121,17 +134,17 @@ function clearList(){
     while (list.firstChild){
         list.removeChild(list.firstChild)
     }
-}
+}*/
 
 //Route to product page
 
-app.get('/', function(req, res){
+/*app.get('/', function(req, res){
     res.render('home.hbs');
-})
+})*/
 
 
 //Route to load product data
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
     const query = `SELECT * FROM product LIMIT 3`;
 
     //Execute Query
@@ -140,9 +153,9 @@ app.get("/", (req, res) => {
             req.session.cart = [];
         }
 
-        response.reder('product', { products : result, cart : req.session.cart});
+        res.render('product', { products : result, cart : req.session.cart});
     });
-});
+});*/
 
 //Create Route for Add Item into Cart
 app.post ('/add_cart', (req, res) => {
