@@ -9,15 +9,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	</head>
     <body>
-    <h1>The Digital Book Corner</h1>
-         {{#each rows}}
-            <p>Book Title: {{this.BookTitle}}</p>
-            {{/each}}
-
+        <h1>The Digital Book Corner</h1>    
         <form action="/search_item" method="POST">
             <input type="text"  name="BookTitle" class="form-control"  placeholder="Enter book title" size="50"><br>
-            <input type="submit" class="btn btn-primary" value="submit">
-        <h1>The Digital Book Corner</h1>
+            <input type="submit" class="btn btn-primary" value="submit">  
 
         <div class="container mt-4">
             {{#each rows}}
@@ -29,16 +24,7 @@
                 </div>
             {{/each}}
         </div>
-
-        <form action="/search_item" method="POST">
-            <input type="search"  name="BookTitle" class="form-control rounded"  placeholder="Search" size="255" aria-label="Search" aria-describedby="search-addon" />
-            <span class="input-group-text border-0" id="search-addon">
-                <i class="fas fa-search"></i>
-            </span>
-            <input type="submit" class="btn btn-primary" value="Search"
-        </form>
-
-        <h2>Genre</h2>
+       
         <form action="/search_genre" method="POST">
         <h2>Genre</h2> 
             <input type="radio" id="Biography" name="genre" value="Biography">
