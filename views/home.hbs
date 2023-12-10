@@ -10,12 +10,18 @@
 	</head>
     <body>
 
+    <h1>The Digital Book Corner</h1>
+         {{#each rows}}
+            <p>Book Title: {{this.BookTitle}}</p>
+            {{/each}}
+
         <form action="/search_item" method="POST">
             <input type="text"  name="BookTitle" class="form-control"  placeholder="Enter book title" size="50"><br>
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
 
         <form action="/search_genre" method="POST">
+        <h2>Genre</h2> 
             <input type="radio" id="Biography" name="genre" value="Biography">
             <label for="biography">Biography</label><br>
             <input type="radio" id="Business" name="genre" value="Business">
@@ -44,6 +50,7 @@
         </form>
 
         <form action="/search_demographics" method="POST">
+        <h3>Reader</h3>
             <input type="radio" id="Adult" name="demographics" value="Adult">
             <label for="Adult">Adult</label><br>
             <input type="radio" id="Teens" name="demographics" value="Teens">
@@ -54,6 +61,7 @@
         </form>
 
         <form action="/search_year" method="POST">
+        <h4>Publish Year</h4>
             <input type="radio" id="0-2000" name="yearrange" value="0-2000">
             <label for="0-2000">Before 2000</label><br>
             <input type="radio" id="2001-2010" name="yearrange" value="2001-2010">
@@ -66,6 +74,7 @@
         </form>
 
         <form action="/search_price" method="POST">
+        <h5> </h5>
             <label for="price">Price Range</label>
             <input type="range" min="0" max="100" value="50" id="price" step="20" list="pricerange">
             <datalist id="pricerange">
