@@ -67,6 +67,7 @@ app.post('/search_genre', function(req,res) {
     var genreEntry = req.body;
 
     dbOperations.getGenreBookList(genreEntry, res);
+
 });
 
 
@@ -197,60 +198,42 @@ app.get('/', function(req, res){
     });
 });*/
 
-//Create Route for Add Item into Cart
-/*app.post ('/add_cart', (req, res) => {
-
-    const ID = req.body.product_ID;
-
-    const BookTitle = req.body.BookTitle; 
-
-    const Author = req.body.Author;
-
-    const book_price = req.body.book_price;
-
-    let count= 0;
-
-    for(let i = 0; i < req.session.cart.length; i++)
-    {
-        if (req.session.cart[i].ID === ID)
-        {
-            request.session.cart[i].quantity += 1;
-
-            count++;
-        }
-    }
-
-    if(count === 0)
-    {
-        const cart_data ={
-            ID : ID, 
-            BookTitle : BookTitle, 
-            Author : Author,
-            book_price_price : parseFloat(book_price_price),
-            quantity : 1
-        };
-
-        req.session,cart.push(car_data);
-    }
-
-    response.redirect("/");
-})*/
-
 //Route to Remove Item form cart
-app.get ('/remove_item', (req, res) => {
+app.post('/delete_item', function (req, res) {
+	//Getting body parameters
+	const { deleterecord} = req.body;
+	dbOperations.deleteItem(deleterecord, res);
+	
+ });
 
-    const ID = req.query.ID;
+//Route to Shopping page
+// Route to handle adding items to the cart
+app.post('/addToCart', (req, res) => {
+    var { BookTitle, Price } = req.body;
 
-    for(let i = 0; i < req.session.cart.length; i++)
-    {
-        if(req.session.cart[i].product_id === product_id)
-        {
-            req.session.cart.splice(i,1);
-        }
-    }
+    console.log({index_cart: req.body});
 
-    res.redirect("/");
-})
+    // Access the cart from app.locals instead of req.session
+    var cart = app.locals.cart;
+
+    //console.log(cart);
+    
+
+    // Add the item to the cart (you may want to check for duplicates or perform additional checks)
+    cart.push({
+        BookTitle: BookTitle,
+        Price: Price,
+    });
+
+    // Respond with a success message or updated cart data
+    res.json({ message: 'Item added to the cart', cart: cart });
+});
+
+app.get('/addToCart', (req, res) => {
+    // Render your shopping page here
+    res.render('shoppingCart.hbs');
+});
+
 
 //Route to Contact page
 app.get ('/contact' , function(req, res) {

@@ -59,6 +59,8 @@ let getGenreBookList = (Genre, res) => {
 
   var searchGenre = `SELECT * FROM bookList WHERE Genre = ?`;
 
+  //console.log(searchGenre);
+
   var params = [Genre];
 
   //console.log(params);
@@ -70,7 +72,7 @@ let getGenreBookList = (Genre, res) => {
     if (err) {
       throw err;
     } else{
-      console.log(rows);
+      //console.log(rows);
       res.render('home', {rows})
     }
   });
@@ -136,7 +138,7 @@ let getYearRangeBookList = (yearRange, res) => {
 };*/
 
 //Insert a book into the database
-let createBook= (BookTitle, Author, Genre, PublishedYear, NumberOfCopies, res) =>{
+/*let createBook= (BookTitle, Author, Genre, PublishedYear, NumberOfCopies, res) =>{
   var createBookItem = 'INSERT INTO bookList (BookTitle, Author, Genre, PublishedYear, NumberOfCopies) VALUES (?,?,?,?,?)'; //Parameterized Query
   var params = [BookTitle, Author, Genre, PublishedYear, NumberOfCopies];
   
@@ -151,13 +153,13 @@ let createBook= (BookTitle, Author, Genre, PublishedYear, NumberOfCopies, res) =
 
       getAllBookTitles(res);
   });
-};
+};*/
 
 
-//Delete a book item
-let deleteBook = (recordToDelete, res) =>{
+//Delete a book item from cart
+let remove_item = (recordToDelete, res) =>{
     
-  var deleteBookItem = 'DELETE FROM bookList WHERE itemID = ?';
+  var deleteBookItem = 'DELETE FROM bookList WHERE ID = ?';
 
   var params = [recordToDelete];
 
@@ -172,7 +174,7 @@ db.run(deleteBookItem, params, function(err){
 });
 
 getAllBookTitles(res);
-}
+};
 
 //Update Book List Item
 let updateBook = (BookTitle, Author, Genre, PublishedYear, NumberOfCopies, res) =>{
@@ -195,4 +197,4 @@ let updateBook = (BookTitle, Author, Genre, PublishedYear, NumberOfCopies, res) 
 };
 
 module.exports = {getAllBookTitles, getSpecificBook, getGenreBookList, getDemographicsBookList, getYearRangeBookList,
-  createBook, deleteBook, updateBook}
+  remove_item, updateBook}
